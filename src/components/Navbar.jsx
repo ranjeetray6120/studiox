@@ -84,7 +84,7 @@ const Navbar = () => {
                     </div>
 
                     <a
-                        href="tel:+911234567890"
+                        href="tel:+91 62019 31911"
                         className={`flex items-center gap-2 px-6 py-3 rounded-full font-sans text-[10px] tracking-widest uppercase font-bold transition-all border ${getButtonClass()}`}
                     >
                         <Phone size={14} />
