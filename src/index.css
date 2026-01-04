@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-warm-50 text-dark-700 font-sans antialiased overflow-x-hidden;
+    /* cursor: none; */
+    /* Removing custom cursor as it can be distracting for some users, but keeping Lenis */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif text-dark-900;
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply px-10 py-4 bg-gold-400 text-white font-semibold tracking-widest hover:bg-gold-500 transition-all duration-300 uppercase text-xs shadow-lg shadow-gold-400/20 active:scale-95;
+  }
+
+  .btn-outline {
+    @apply px-10 py-4 border border-gold-400 text-gold-500 font-semibold tracking-widest hover:bg-gold-400 hover:text-white transition-all duration-300 uppercase text-xs active:scale-95;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-6xl font-serif text-dark-900 mb-6 leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-gold-500 font-sans font-semibold tracking-widest-xl uppercase mb-4 text-xs;
+  }
+}
+
+/* Lenis Scroll Premium Feel */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-warm-50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gold-400 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gold-500;
+}
