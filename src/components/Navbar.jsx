@@ -29,15 +29,26 @@ const Navbar = () => {
         { name: 'Contact', path: '/contact' },
     ];
 
+    // Body scroll lock
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
     // Determine text color based on scroll
     const getTextColor = () => {
-        if (scrolled) return 'text-dark-900';
         return 'text-white';
     };
 
     const getSubTextColor = () => {
-        if (scrolled) return 'text-gray-400';
-        return 'text-white/60';
+        if (scrolled || isOpen) return 'text-white/60';
+        return 'text-white/80';
     };
 
     const getButtonClass = () => {
@@ -46,7 +57,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-md py-4 shadow-sm border-b border-warm-100' : 'bg-transparent py-8'}`}>
+        <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-dark-900/95 backdrop-blur-md py-4 shadow-lg border-b border-white/5' : 'bg-transparent py-8'}`}>
             <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
                 {/* Logo Section */}
                 <Link to="/" className="group flex flex-col">
@@ -83,10 +94,11 @@ const Navbar = () => {
 
                 {/* Mobile Toggle */}
                 <button
-                    className={`lg:hidden transition-colors ${getTextColor()}`}
+                    className={`lg:hidden transition-colors relative z-[60] ${getTextColor()}`}
                     onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Toggle Menu"
                 >
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
+                    {isOpen ? <X size={32} /> : <Menu size={32} />}
                 </button>
             </div>
 
@@ -94,27 +106,46 @@ const Navbar = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, x: '100%' }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: '100%' }}
-                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center gap-8 lg:hidden"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="fixed inset-0 z-[55] bg-dark-900 w-full h-[100vh] flex flex-col justify-center items-center lg:hidden"
                     >
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                to={link.path}
-                                className="text-2xl font-serif text-dark-900 hover:text-gold-400 transition-colors"
-                                onClick={() => setIsOpen(false)}
+                        <div className="flex flex-col items-center gap-8">
+                            {navLinks.map((link, index) => (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.1 + index * 0.05 }}
+                                    key={link.name}
+                                >
+                                    <Link
+                                        to={link.path}
+                                        className="text-4xl font-serif text-white hover:text-gold-400 transition-colors tracking-wide"
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                            className="mt-12 flex flex-col items-center gap-6"
+                        >
+                            <div className="w-12 h-[1px] bg-gold-400/30"></div>
+                            <a
+                                href="tel:+911234567890"
+                                className="flex items-center gap-3 text-gold-400 font-sans tracking-[0.2em] uppercase text-sm font-bold hover:text-gold-300 transition-colors"
                             >
-                                {link.name}
-                            </Link>
-                        ))}
-                        <div className="w-12 h-[1px] bg-warm-100 my-4"></div>
-                        <a href="tel:+911234567890" className="flex items-center gap-3 text-gold-500 font-sans tracking-widest uppercase text-xs font-bold">
-                            <Phone size={16} />
-                            Call Studiox
-                        </a>
+                                <Phone size={18} />
+                                Call Studiox
+                            </a>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>

@@ -2,24 +2,28 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import mandapImage from '../assets/images/mandap.png';
 
 const Hero = () => {
     return (
         <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-dark-900">
-            {/* High-Impact Indian Wedding Reel Background */}
+            {/* High-Impact Cultural Background */}
             <div className="absolute inset-0 z-0">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover opacity-50"
+                <motion.div
+                    initial={{ scale: 1.2 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 20, ease: "easeOut", repeat: Infinity, repeatType: "reverse" }}
+                    className="w-full h-full"
                 >
-                    {/* A vibrant Indian wedding scene - focus on rituals and emotions */}
-                    <source src="https://videos.pexels.com/video-files/4255140/4255140-uhd_2560_1440_30fps.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-b from-dark-900/60 via-transparent to-dark-900"></div>
+                    <img
+                        src={mandapImage}
+                        alt="Grand Bihari Wedding Mandap"
+                        className="w-full h-full object-cover opacity-60"
+                        style={{ filter: 'brightness(0.7) contrast(1.1)' }}
+                    />
+                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-b from-dark-900/40 via-transparent to-dark-900"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,10,10,0.6)_100%)]"></div>
             </div>
 
             {/* Content Overlay */}
@@ -31,7 +35,7 @@ const Hero = () => {
                     className="mb-8 flex flex-col items-center"
                 >
                     <span className="text-gold-400 font-sans tracking-[0.4em] uppercase text-[10px] md:text-xs font-bold leading-relaxed mb-4">
-                        Premier Wedding Studio of Bihar
+                        The Soul of Mithila & Bihar
                     </span>
                     <div className="w-16 h-[1px] bg-gold-400 opacity-50 mb-8"></div>
                 </motion.div>
@@ -40,19 +44,18 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className="text-white font-serif text-5xl md:text-8xl lg:text-9xl font-bold mb-10 leading-[0.9] tracking-tight"
+                    className="text-white font-serif text-5xl md:text-8xl lg:text-9xl font-bold mb-10 leading-[0.9] tracking-tight drop-shadow-2xl"
                 >
-                    Preserving <br /> <span className="italic font-light text-gold-400">Timeless Legacies</span>
+                    Cultural <br /> <span className="italic font-light text-gold-400">Grandeur</span>
                 </motion.h1>
 
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 0.5 }}
-                    className="text-white/80 text-lg md:text-xl font-sans font-light mb-14 max-w-2xl mx-auto leading-relaxed"
+                    className="text-white/90 text-lg md:text-xl font-sans font-light mb-14 max-w-2xl mx-auto leading-relaxed"
                 >
-                    From the vibrant colors of <span className="text-white font-medium italic">Haldi</span> to the grand emotions of <span className="text-white font-medium italic">Vidaai</span>.
-                    We capture the soul of your celebrations in Begusarai and beyond.
+                    Preserving the essence of <span className="text-white font-medium italic">Bihari traditions</span> — from the sacred <span className="text-gold-300">Mandap</span> to the emotional <span className="text-gold-300">Vidaai</span>.
                 </motion.p>
 
                 <motion.div
